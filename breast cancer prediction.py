@@ -58,13 +58,12 @@ for t in range(1000):
 
     if t % 10 == 0:
         prediction = torch.max(F.softmax(prediction), 1)[1]
-        train_pred = prediction.data.numpy().squeeze()
-        train_acc = sum(train_pred == train_Y.data.numpy()) / train_X.shape[0]
+        train_pred = prediction.numpy().squeeze()
+        train_acc = sum(train_pred == train_Y.numpy()) / train_X.shape[0]
         print('第{}轮训练的训练集loss为{:.4f}，acc为{:.4f}'.format(t, loss, train_acc))
 
 test_pred = net(test_X)
 test_pred = torch.max(F.softmax(test_pred), 1)[1]
-test_pred = test_pred.data.numpy().squeeze()
-test_acc = sum(test_pred == test_Y.data.numpy()) / test_X.shape[0]
+test_pred = test_pred.numpy().squeeze()
+test_acc = sum(test_pred == test_Y.numpy()) / test_X.shape[0]
 print('训练好的网络在测试集上的acc为{:.4f}'.format(test_acc))
-
